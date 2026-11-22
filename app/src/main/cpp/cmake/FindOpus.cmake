@@ -16,6 +16,15 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(opus_source)
 
+# Upstream Opus exposes headers as <opus.h> from its source include directory,
+# while chiaki-ng includes them as <opus/opus.h>. Mirror the public headers into
+# that namespaced layout for consumers; keep the Opus target itself unchanged.
+set(OPUS_COMPAT_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/opus-compat-include")
+file(MAKE_DIRECTORY "${OPUS_COMPAT_INCLUDE_DIR}/opus")
+file(COPY "${opus_source_SOURCE_DIR}/include/"
+     DESTINATION "${OPUS_COMPAT_INCLUDE_DIR}/opus"
+     FILES_MATCHING PATTERN "*.h")
+
 set(Opus_FOUND TRUE)
 set(Opus_LIBRARIES opus)
-set(Opus_INCLUDE_DIRS "${opus_source_SOURCE_DIR}/include")
+set(Opus_INCLUDE_DIRS "${OPUS_COMPAT_INCLUDE_DIR}")
