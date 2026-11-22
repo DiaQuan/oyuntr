@@ -44,8 +44,9 @@ set(CHIAKI_VERSION_MINOR 10)
 set(CHIAKI_VERSION_PATCH 1)
 set(CHIAKI_VERSION 1.10.1)
 add_definitions(-DCHIAKI_VERSION_MAJOR=1 -DCHIAKI_VERSION_MINOR=10 -DCHIAKI_VERSION_PATCH=1 -DCHIAKI_VERSION=\"1.10.1\")
+# Prefer OyunTR's Android-aware Opus finder before chiaki-ng's desktop-oriented finder.
+list(PREPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 list(APPEND CMAKE_MODULE_PATH "${chiaki_ng_SOURCE_DIR}/cmake")
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 include(OpenSSLExternalProject)
 include(JsoncExternalProject)
