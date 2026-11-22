@@ -30,7 +30,7 @@ class MainActivity : Activity() {
         val content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(64), dp(40), dp(64), dp(48))
-            setBackgroundColor(background)
+            setBackgroundColor(this@MainActivity.background)
         }
 
         content.addView(label("OYUNTR", 14, accent, bold = true))
@@ -80,7 +80,7 @@ class MainActivity : Activity() {
         val scroll = ScrollView(this).apply {
             isFillViewport = true
             clipToPadding = false
-            setBackgroundColor(background)
+            setBackgroundColor(this@MainActivity.background)
             addView(content)
         }
         return scroll

@@ -67,13 +67,15 @@ class AndroidVideoDecoder(
         }
     }
 
-    override fun close() = synchronized(lock) {
-        codec?.let { active ->
-            try {
-                active.stop()
-            } finally {
-                active.release()
-                codec = null
+    override fun close() {
+        synchronized(lock) {
+            codec?.let { active ->
+                try {
+                    active.stop()
+                } finally {
+                    active.release()
+                    codec = null
+                }
             }
         }
     }
